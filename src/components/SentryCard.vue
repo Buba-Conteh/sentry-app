@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <div class="card w-50 m-auto">
+  <div class="p-3">
+    <div class="card w-50 offset-6 bg-transperent mb-4 mr-3">
       <div class="card-header text-center">
-        Sentery App
+        <h1 class="text-uppercase">Sentery App</h1>
       </div>
       <div class="card-body">
         <div class="row">
@@ -47,8 +47,9 @@
                 </div>
                 <div class="col-4 offset-4 mt-3">
                   <button
+                    ref="btn"
                     type="button"
-                    class="form-control btn-outline-warning"
+                    class="form-control btn-outline-cstm-secondary"
                     @click.prevent="distributeTime"
                   >
                     Sentry time
@@ -59,7 +60,7 @@
           </div>
         </div>
 
-        <table class="table table-responsive">
+        <table class="table table-responsive table-hover">
           <thead class="thead-inverse">
             <tr>
               <th>#</th>
@@ -72,24 +73,20 @@
             <tr
               v-for="(personnel, index) in sentryPersonnels"
               :key="index"
-               @mouseover="showTrash()"
-               @mouseout="hideTrash()"
+              class="t-row"
             >
               <td>{{ ++index }}</td>
               <td scope="row">{{ personnel.name }}</td>
               <td>{{ personnel.end + " - " + personnel.start }}</td>
-              <td class="text-danger">
+              <td class="text-danger t-data">
                 <svg
-                 
                   width="1em"
                   height="1em"
                   viewBox="0 0 16 16"
-                  class="bi bi-x"
+                  class="bi bi-x svg"
                   fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg"
-
-                v-bind:style="{ display: displayMode }"
-                 
+                  @click="deletePersonnel(index)"
                 >
                   <path
                     fill-rule="evenodd"
@@ -111,7 +108,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "SentryCard",
   props: {
     msg: String,
   },
@@ -124,21 +121,17 @@ export default {
       sentryTime: [],
       totalTimeInMinutes: 0,
       error: {},
-      displayMode:'none'
     };
   },
   methods: {
+    deletePersonnel: function(index) {
+      if (index > -1) {
+        index--;
+        this.sentryPersonnels.splice(index, 1);
+        console.log(index);
+      }
+    },
 
-    showTrash: function () {
-      // this.$refs.trash.style.diplay :'inline'
-      this.displayMode="inline"
-      console.log(this.displayMode);
-    },
-    hideTrash: function () {
-      // this.$refs.trash.style.diplay :'inline'
-      this.displayMode="none"
-      // console.log(this.displayMode);
-    },
     savePersonnel: function() {
       this.sentryPersonnels.push({
         name: this.names,
@@ -147,15 +140,12 @@ export default {
       });
 
       this.names = "";
-      console.log(this.sentryPersonnels);
-      console.log(this.startTime);
-      // console.log(this.$refs.trash);
-      console.log(this.displayMode);
-
-     
+      // console.log(this.sentryPersonnels);
+      // console.log(this.startTime);
+      // console.log(this.$refs.btn);
+      // console.log(this.displayMode);
     },
-   
-   
+
     distributeTime: function() {
       // this.sentryPersonnels = [];
       let initTime = this.startTime;
@@ -286,13 +276,38 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-/* .t-row:hover ~ svg{
-   display: inline;
-   cursor: pointer;
- } */
-.t-row:hover {
-  
+table.table .svg {
+  visibility: hidden;
+}
+table.table tr:hover {
   cursor: pointer;
+  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+}
+table.table tr:hover .svg {
+  visibility: visible;
+  cursor: pointer;
+}
+
+h1 {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+.card {
+  background-color: rgba(240, 236, 21, 0.938) !important;
+}
+.ffset-6 {
+  offset: 5em;
+}
+input{
+  background-color: rgba(245, 245, 245, 0.719);
+}
+.btn-outline-cstm-secondary{
+  background-color: rgb(63,61,86);
+  color: whitesmoke;
+  outline: none;
+  border: none;
+}
+.btn-outline-cstm-secondary:hover{
+    background-color: rgba(63, 61, 86, 0.904);
+    background-color: gradient();
 }
 </style>
