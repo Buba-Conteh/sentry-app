@@ -1,6 +1,6 @@
 <template>
   <div class="p-3">
-    <div class="card w-50 offset-6 bg-transperent mb-4 mr-3">
+    <div class="card w-lg-50 w-sm-100 offset-lg-6 bg-transperent mb-4 mr-3 shadow-bg">
       <div class="card-header text-center">
         <h1 class="text-uppercase">Sentery App</h1>
       </div>
@@ -24,7 +24,7 @@
           <div class="col-12 my-2">
             <form action="">
               <div class="form-group row">
-                <div class="col-10">
+                <div class="col-lg-10 col-sm-11">
                   <!-- <label for="">Personnels Name</label> -->
                   <input
                     placeholder="Add personel name here"
@@ -36,7 +36,7 @@
                   <!-- <span class="text-danger">Please make sure you enter personnlls first</span> -->
                 </div>
 
-                <div class="col-2">
+                <div class="col-lg-2 col-sm-12">
                   <button
                     type="button"
                     class="form-control btn-success btn-sm"
@@ -45,7 +45,7 @@
                     add
                   </button>
                 </div>
-                <div class="col-4 offset-4 mt-3">
+                <div class="col-lg-4 offset-lg-4 offset-sm-6 mt-3 col-sm-6">
                   <button
                     ref="btn"
                     type="button"

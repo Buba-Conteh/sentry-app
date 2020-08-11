@@ -44,11 +44,12 @@ export default {
 <style>
 .footer {
   background-color: rgb(63, 61, 86);
-  /* position: absolute; */
-  /* bottom: 0; */
+  position: fixed;
+  bottom: 0;
   width: 100%;
   /* overflow: hidden; */
   margin-top: auto;
+  /* margin-top: 3em; */
 }
 p{
     /* border-top:1px inset whitesmoke; */
