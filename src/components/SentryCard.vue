@@ -52,7 +52,11 @@
                     class="form-control btn-outline-cstm-secondary"
                     @click.prevent="distributeTime"
                   >
-                    Sentry time
+                  <span  v-show="!svgLoader">Sentry time</span>
+                    
+                    <span>
+                      <img v-show="svgLoader" src="../assets/Spinner-200px.svg" height="25" alt="">
+                    </span>
                   </button>
                 </div>
               </div>
@@ -121,10 +125,14 @@ export default {
       sentryTime: [],
       totalTimeInMinutes: 0,
       error: {},
+      svgLoader:false
     };
   },
   methods: {
     deletePersonnel: function(index) {
+
+    
+       
       if (index > -1) {
         index--;
         this.sentryPersonnels.splice(index, 1);
@@ -147,6 +155,10 @@ export default {
     },
 
     distributeTime: function() {
+        this.svgLoader=true
+     setTimeout(() => {
+        this.svgLoader=false
+    
       // this.sentryPersonnels = [];
       let initTime = this.startTime;
       this.startTime = this.startTime.split(":");
@@ -159,16 +171,21 @@ export default {
       if (this.sentryPersonnels.length - 1 < 1) {
         this.error.massage = "Please make sure you insert personels first";
       }
-
-      this.totalTimeInMinutes = this.totalTimeInMinutes - startSeconds;
-
+        if (startSeconds > this.totalTimeInMinutes) {
+          this.totalTimeInMinutes = this.totalTimeInMinutes + ((24*60 ) - startSeconds);
+        }
+        else{
+           this.totalTimeInMinutes = this.totalTimeInMinutes - startSeconds;
+        }
+     
+      
       let secondsPerPerson = Math.floor(
         this.totalTimeInMinutes / this.sentryPersonnels.length
       );
-
+      // console.log();
       let initialHour = this.startTime[0];
       // let minutesleft = 0;
-      let personelSentryhour = "";
+      let personelSentryhour = initTime;
       let currentMinute;
 
       this.sentryPersonnels.forEach((personnel, index) => {
@@ -193,6 +210,9 @@ export default {
               do {
                 initialHour++;
                 currentMinute = currentMinute - 60;
+                  if (initialHour >= 24) {
+              initialHour = 0;
+            }
               } while (currentMinute >= 60);
             }
 
@@ -217,17 +237,24 @@ export default {
           }
         }
 
-        if (secondsPerPerson > 60) {
-          currentMinute = secondsPerPerson;
-          if (currentMinute >= 60) {
+        if (secondsPerPerson >= 60) {
+          //  personelSentryhour =initTime
+           currentMinute = personelSentryhour.split(":");
+
+            currentMinute = Number(currentMinute[1]) + Number(secondsPerPerson);
+          // currentMinute = secondsPerPerson;
+          if (secondsPerPerson >= 60) {
             do {
               initialHour++;
               currentMinute = currentMinute - 60;
-            } while (currentMinute >= 60);
 
-            if (initialHour >= 24) {
+               if (initialHour >= 23) {
               initialHour = "00";
             }
+
+            } while (currentMinute >= 60);
+
+           
           }
 
           initialHour =
@@ -257,6 +284,7 @@ export default {
             };
           }
         }
+        
       });
 
       // this.sentryPersonnels.map
@@ -265,8 +293,9 @@ export default {
       console.log(this.startTime, startSeconds);
       // console.log(this.endTime, this.totalTimeInMinutes);
       console.log(this.sentryPersonnels);
-      console.log(this.sentryTime);
+      console.log(secondsPerPerson);
       // return this.sentryTime;
+        }, 1500);
     },
   },
 
