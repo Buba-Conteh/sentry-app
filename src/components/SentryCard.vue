@@ -55,7 +55,7 @@
                   <span  v-show="!svgLoader">Sentry time</span>
                     
                     <span>
-                      <img v-show="svgLoader" src="../assets/Spinner-200px.svg" height="25" alt="">
+                      <img v-show="svgLoader" src="../assets/Spinner-200px.svg" height="30" alt="">
                     </span>
                   </button>
                 </div>
