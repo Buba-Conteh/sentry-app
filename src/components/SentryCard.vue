@@ -18,7 +18,7 @@
             </div>
             <div class="form-group">
               <label for="">End Time</label>
-              <input type="time" v-model="endTime" class="form-control" />
+              <input type="time" id="name" v-model="endTime" class="form-control" />
             </div>
           </div>
           <div class="col-12 my-2">
@@ -107,10 +107,13 @@
         </table>
       </div>
     </div>
+     
   </div>
 </template>
 
 <script>
+// elem.show();
+ 
 export default {
   name: "SentryCard",
   props: {
@@ -154,7 +157,19 @@ export default {
       // console.log(this.displayMode);
     },
 
+    // verlidate: function(){
+    //   if (this.sentryPersonnels.length==0) {
+        
+      
+           
+    //   }
+      
+    // },
+
     distributeTime: function() {
+
+     
+
         this.svgLoader=true
      setTimeout(() => {
         this.svgLoader=false

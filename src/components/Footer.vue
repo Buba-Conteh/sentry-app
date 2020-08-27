@@ -1,5 +1,7 @@
 <template>
+
   <div class="footer p-1 px-0 pb-0">
+    
     <div class="text-light d-flex justify-content-center">
       <div class="fa m-2">
           <a href="https://www.facebook.com/buba.conteh.39" target="_blank">

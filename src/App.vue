@@ -1,28 +1,21 @@
 <template>
   <div id="app" class="container-fluid d-flex" >
-    <!-- <div class="text-left">
-    <button
-      type="button"
-      class="btn btn-secondary rounded-0 btn-sm"
-      data-toggle="tooltip"
-      data-placement="top"
-      title=""
-      @click="changeColor()"
-    >
-
-
-     Chanage
-    </button>
-  </div> -->
+  
     <SentryCard />
-
+    
+      
+      
     <Footer />  
+
+    
   </div>
 </template>
 
 <script>
 import SentryCard from "./components/SentryCard.vue";
 import Footer from "./components/Footer.vue";
+// import 'bootstrap/dist/css/bootstrap.css'
+
 // import ChangeColor from "./components/ChangeColor.vue";
 
 export default {
